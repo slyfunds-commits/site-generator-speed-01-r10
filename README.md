@@ -29,7 +29,7 @@ The harness runs `node /bot/main.ts` (node22): it reads every case from `/input/
 ## Local measurements (pinned node 22.21.1, cold, plain `node main.ts`)
 
 - Practice full-diff: **0/3 bad cases**; determinism byte-identical across runs. Markdown differential vs the vendor JS: **0 mismatches on 1,024 practice bodies, 0/113 edge cases, 0/4,000 fuzz bodies**. ASan/UBSan clean.
-- Cold CPU, median of 20 interleaved runs: entry **~238–265 ms**, house null **~232–244 ms** — delta **~+5 to +23 ms across runs (median ≈ +19 ms)** under a loaded machine. This entry does NOT reach the null-like baseline; it is better than round 9 (+25 ms) and round 7 (140 ms grader) but the paid bar is 0 and the remaining gap (~15 ms of engine work, mostly layouts + markdown + emit) needs a further interpreter rewrite to close. Projected grader cpu_us ≈ 55–60 ms (round 9 projected ~75 ms, round 8 ~102 ms).
+- Cold CPU, median of 20 interleaved runs: entry **~236–265 ms**, house null **~224–244 ms** — delta **~+5 to +23 ms across runs (median ≈ +15 ms over 6 runs)** under a loaded machine. This entry does NOT reach the null-like baseline; it is better than round 9 (+25 ms) and round 7 (140 ms grader) but the paid bar is 0 and the remaining gap (~15 ms of engine work, mostly layouts + markdown + emit) needs a further interpreter rewrite to close. Projected grader cpu_us ≈ 50–60 ms (round 9 projected ~75 ms, round 8 ~102 ms).
 - `.node`: 213,744 bytes, zero undefined dynamic symbols (`nm -D` shows none), `ldd` reports "statically linked". Repo total well under the 4 MiB cap.
 
 ## Build the .node
